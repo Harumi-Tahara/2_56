@@ -1,13 +1,12 @@
 <?php
-//	session_1.php
+// session_1.php
 
-//	ã‚»ãƒƒã‚·ãƒ§ãƒ³é–‹å§‹
-
+// ƒZƒbƒVƒ‡ƒ“ŠJŽn
 ob_start();
 session_start();
 //
 var_dump($_SESSION);
-//	ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€ã¤å…¥ã‚Œã‚‹
+// ƒf[ƒ^‚ðˆê‚Â“ü‚ê‚é
 $_SESSION['rand'] = mt_rand(0, 1000);
 //
 var_dump($_SESSION);

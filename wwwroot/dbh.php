@@ -1,31 +1,40 @@
 <?php
-//  dbh.php
+// dbh.php
 require_once('db_config.php');
-//  DBç”¨é–¢æ•°
+
+// DB—pŠÖ”
+// ----------------------------
 function get_dbh() {
-	//  è¨­å®šå€¤ã®å–å¾—
-	$db_config = db_config();
-	// ãƒ‡ãƒ¼ã‚¿ã®è¨­å®š
-	$user = $db_config['user'];
-	$pass = $db_config['pass'];
-	$dsn = 'mysql:dbname={$db_config['database']};host={$db_config['host']};charset={$db_config['charset']};';
-	// æŽ¥ç¶šã‚ªãƒ—ã‚·ãƒ§ãƒ³ã®è¨­å®š
-	$opt = array (
-		PDO::ATTR_EMULATE_PREPARES => false,
-	);
-	// ã€Œè¤‡æ–‡ç¦æ­¢ã€ãŒå¯èƒ½ãªã‚‰ä»˜ã‘è¶³ã—ã¦ãŠã
-	if (defined('PDO::MYSQL_ATTR_MULTI_STATEMENTS')) {
-		$opt[PDO::MYSQL_ATTR_MULTI_STATEMENTS] = false;
+	//	u“ñdÚ‘±v‚ð–h‚®‚½‚ß‚ÌƒƒWƒbƒN
+	static $dbh = NULL;
+	if(NULL !== $dbh){
+		return $dbh;
 	}
-	// æŽ¥ç¶š
-	try {
-		$dbh = new PDO($dsn, $user, $pass, $opt);
-	} catch (PDOException $e) {
-		// XXX æœ¬å½“ã¯ã‚‚ã†å°‘ã—ä¸å¯§ãªã‚¨ãƒ©ãƒ¼ãƒšãƒ¼ã‚¸ã‚’å‡ºåŠ›ã™ã‚‹
-		echo 'ã‚·ã‚¹ãƒ†ãƒ ã§ã‚¨ãƒ©ãƒ¼ãŒèµ·ãã¾ã—ãŸ';
-		exit;
-	}
-	//
-	return $dbh;
+
+    // Ý’è’l‚ÌŽæ“¾
+    $db_config = db_config();
+    // ƒf[ƒ^‚ÌÝ’è
+    $user = $db_config['user'];
+    $pass = $db_config['pass'];
+    $dsn = "mysql:dbname={$db_config['database']};host={$db_config['host']};charset={$db_config['charset']}";
+
+    // Ú‘±ƒIƒvƒVƒ‡ƒ“‚ÌÝ’è
+    $opt = array (
+        PDO::ATTR_EMULATE_PREPARES => false,
+    );
+    // u•¡•¶‹ÖŽ~v‚ª‰Â”\‚È‚ç•t‚¯‘«‚µ‚Ä‚¨‚­
+    if (defined('PDO::MYSQL_ATTR_MULTI_STATEMENTS')) {
+        $opt[PDO::MYSQL_ATTR_MULTI_STATEMENTS] = false;
+    }
+
+    // Ú‘±
+    try {
+        $dbh = new PDO($dsn, $user, $pass, $opt);
+    } catch (PDOException $e) {
+        // XXX –{“–‚Í‚à‚¤­‚µ’š”J‚ÈƒGƒ‰[ƒy[ƒW‚ðo—Í‚·‚é
+        echo 'ƒVƒXƒeƒ€‚ÅƒGƒ‰[‚ª‹N‚«‚Ü‚µ‚½';
+        exit;
+    }
+    //
+    return $dbh;
 }
-?>

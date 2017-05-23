@@ -1,9 +1,9 @@
 <?php
+// session_2.php
 
-//  session_2.php
-
-//  ã‚»ãƒƒã‚·ãƒ§ãƒ³é–‹å§‹
+// ƒZƒbƒVƒ‡ƒ“ŠJŽn
 ob_start();
 session_start();
 
+//
 var_dump($_SESSION);
