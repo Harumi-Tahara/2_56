@@ -1,8 +1,7 @@
 <?php
 // inquiry_fin.php
 //
-ob_start();
-session_start();
+require_once( __DIR__ . '/init.php');
 
 //
 require_once( __DIR__ . '/dbh.php');
@@ -105,9 +104,5 @@ if (false === $r) {
 }
 
 // 「ありがとう」Pageの出力
+$smarty_obj->display('inquiry_fin.tpl');
 ?>
-<html>
-	<body>
-		入力ありがとうございました。
-	</body>
-</html>
