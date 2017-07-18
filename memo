@@ -7,3 +7,11 @@
 
 ---	学習用途
 ・誕生日
+
+
+git手順
+Puttyでログイン
+cd Inquiry
+git add .
+git commit -a -m 'コミットメッセージ'
+git push
